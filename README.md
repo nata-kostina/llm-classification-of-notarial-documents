@@ -1,5 +1,17 @@
 # 📜 Classification of notarial documents
 
+## Table of Contents
+
+* [Overview](#overview)
+* [Key Features](#key-features)
+* [Tech Stack](#tech-stack)
+* [Quickstart & Installation](#quickstart--installation)
+* [Data Preparation](#data-preparation)
+* [Database Setup](#database-setup)
+* [Project Layout](#project-layout)
+* [Usage & Execution](#usage--execution)
+
+
 ## Overview
 
 This project provides an end-to-end Machine Learning pipeline designed to classify legal and notarial documents into predefined categories using LLM-based Retrieval-Augmented Generation (RAG). The workflow integrates raw data preprocessing, database storage, and an MLflow Tracking server for experiment management and performance metrics monitoring.
@@ -23,7 +35,7 @@ This project provides an end-to-end Machine Learning pipeline designed to classi
 * **Ruff** — Extremely fast Python linter and code formatter.
 * **Pytest**
 
-## Install
+## Quickstart & Installation
 ### Prerequisites
 
 * **Python 3.14** or newer
