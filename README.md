@@ -5,6 +5,7 @@
 * [Overview](#overview)
 * [Key Features](#key-features)
 * [Tech Stack](#tech-stack)
+* [LLM Prompt & Inference Flow](#llm-prompt--inference-flow)
 * [Quickstart & Installation](#quickstart--installation)
 * [Data Preparation](#data-preparation)
 * [Database Setup](#database-setup)
@@ -20,9 +21,9 @@ This project provides an end-to-end Machine Learning pipeline designed to classi
 
 * LLM-Based Classification
 * Vector Embeddings & Retrieval
-* Evaluations 
+* RAG Retrieval Evaluation (Mean Precision@K, MAP@K, Mean Hit Rate, Mean Reciprocal Rank)
+* LLM Classification Evaluation (Benchmarked against a Golden Dataset)
 * Experiment Tracking & Monitoring
-* Data Pipeline & Persistence 
 * Unit Testing
 
 ## Tech Stack
@@ -34,6 +35,34 @@ This project provides an end-to-end Machine Learning pipeline designed to classi
 * **uv** — High-performance Python package and project management.
 * **Ruff** — Extremely fast Python linter and code formatter.
 * **Pytest**
+
+## LLM Prompt & Inference Flow
+
+```mermaid
+flowchart TD
+    subgraph Input ["📥 Inputs (Prompt Construction)"]
+        Doc["Target Document Content"]
+        Rules["Classification Rules"]
+        Context["Similar Documents Context (RAG Examples)"]
+    end
+
+    subgraph Core ["⚙️ Inference Engine"]
+        LLM["🤖 LLM Engine"]
+    end
+
+    subgraph Output ["📤 Model Outputs"]
+        Category["Predicted Document Category"]
+        PredictedRules["Relevant Rule IDs (e.g., 1.1.1)"]
+    end
+
+    %% Connections
+    Doc --> LLM
+    Rules --> LLM
+    Context --> LLM
+
+    LLM --> Category
+    LLM --> PredictedRules
+```
 
 ## Quickstart & Installation
 ### Prerequisites
@@ -203,7 +232,7 @@ uv run python src/scripts/run_evaluation.py --run-id <YOUR_CLASSIFICATION_RUN_ID
 ```
 #### Available Evaluation Flags:
 
-* `--eval-classification`: Computes standard classification metrics (Accuracy, Precision, Recall, F1-score). (Enabled by default: `True`)
-* `--eval-rules`: Validates business rules and output structural constraints. (Enabled by default: `True`)
+* `--eval-classification`: Computes classification metrics (Accuracy, Precision, Recall, F1-score) for the predicted document categories. (Enabled by default: `True`)
+* `--eval-rules`: Computes metrics for the predicted classification rules identified by the LLM as critical for accurate document classification. (Enabled by default: `True`)
 
 *(Note: To disable a default metric, pass `--no-eval-classification` or `--no-eval-rules` when running the command).*
