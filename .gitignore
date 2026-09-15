@@ -1,0 +1,44 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Environmental Variables
+.env
+
+# Cache files
+.ruff_cache
+
+# VS Code
+.vscode
+
+# Logs
+log
+logs
+
+# Private files
+*GABI*
+
+# MLFlow
+mlruns/*
+mlflow.db
+
+# Temporary files
+tmp
+
+# Data
+data
+prompts/property_rules
+
+# Tests coverage files
+htmlcov
+.coverage
+
+# Pytest cache
+.pytest_cache
